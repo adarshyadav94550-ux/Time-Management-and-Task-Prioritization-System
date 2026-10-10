@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TaskFlow | Time Management and Task Prioritization System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="logo" href="#home">TaskFlow</a>
+    <nav aria-label="Main"><a href="#planner">Planner</a><a href="#matrix">Priority matrix</a><a href="#team">Team</a></nav>
+  </header>
+
+  <!-- HERO: rotating 3D cube, front face is a live clock -->
+  <section id="home" class="hero">
+    <div class="hero-text">
+      <h1>Know what to do first, before the deadline finds you.</h1>
+      <p>TaskFlow ranks your tasks by priority and due time, reminds you before they are due, and shows what to do now, plan, or drop.</p>
+      <a class="btn" href="#planner">Plan my day</a>
+    </div>
+    <div class="scene" aria-hidden="true">
+      <div class="cube">
+        <div class="face front"><span id="clock">00:00</span><small id="clockDate"></small></div>
+        <div class="face back"><b id="cubeDone">0</b><small>done</small></div>
+        <div class="face right"><b id="cubeDue">0</b><small>due today</small></div>
+        <div class="face left"><b id="cubeLate">0</b><small>overdue</small></div>
+        <div class="face top"></div><div class="face bottom"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANNER -->
+  <section id="planner" class="section">
+    <h2>Planner</h2>
+    <div class="stats">
+      <div class="stat tilt"><b id="sTotal">0</b><span>Total tasks</span></div>
+      <div class="stat tilt"><b id="sToday">0</b><span>Due today</span></div>
+      <div class="stat tilt"><b id="sDone">0</b><span>Completed</span></div>
+      <div class="stat tilt late"><b id="sLate">0</b><span>Overdue</span></div>
+    </div>
+    <div class="progress" role="progressbar" aria-label="Completion" aria-valuemin="0" aria-valuemax="100"><div id="bar"></div></div>
+
+    <div class="planner-grid">
+      <form id="taskForm" class="panel">
+        <h3>Add a task</h3>
+        <label>Task title<input id="title" required maxlength="80" placeholder="e.g. Finish JDBC module"></label>
+        <label>Priority
+          <select id="priority"><option>High</option><option selected>Medium</option><option>Low</option></select>
+        </label>
+        <label>Category
+          <select id="category"><option>Study</option><option>Project</option><option>Personal</option><option>Work</option></select>
+        </label>
+        <label>Due date and time<input id="due" type="datetime-local" required></label>
+        <button class="btn" type="submit">Add task</button>
+      </form>
+
+      <div class="panel">
+        <div class="toolbar">
+          <input id="search" type="search" placeholder="Search tasks" aria-label="Search tasks">
+          <div class="chips" role="group" aria-label="Filter">
+            <button class="chip on" data-f="all">All</button>
+            <button class="chip" data-f="pending">Pending</button>
+            <button class="chip" data-f="done">Done</button>
+          </div>
+        </div>
+        <ul id="list" class="list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EISENHOWER MATRIX -->
+  <section id="matrix" class="section">
+    <h2>Priority matrix</h2>
+    <p class="note">Urgent means due within 2 days. Important means High or Medium priority.</p>
+    <div class="matrix">
+      <div class="q do"><h3>Do now</h3><ul id="q-do"></ul></div>
+      <div class="q plan"><h3>Plan it</h3><ul id="q-plan"></ul></div>
+      <div class="q hand"><h3>Quick finish</h3><ul id="q-hand"></ul></div>
+      <div class="q drop"><h3>Drop or delay</h3><ul id="q-drop"></ul></div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team" class="section">
+    <h2>Our team</h2>
+    <div class="team">
+      <div class="member tilt lead"><div class="avatar">AY</div><b>Adarsh Yadav</b><span>Team Leader</span></div>
+      <div class="member tilt"><div class="avatar">MM</div><b>Manvi Malik</b><span>Member</span></div>
+      <div class="member tilt"><div class="avatar">AB</div><b>Adarsh Bharti</b><span>Member</span></div>
+      <div class="member tilt"><div class="avatar">AN</div><b>Anubhav</b><span>Member</span></div>
+    </div>
+  </section>
+
+  <footer>Time Management and Task Prioritization System. Java Web Project.</footer>
+  <div id="toasts" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
